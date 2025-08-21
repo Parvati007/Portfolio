@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parvati | Portfolio</title>
+  <meta name="description" content="Parvati – Software Developer Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfFhQ4m5QhQh7a7oH5qD0H0vM3Q+fQy3bC0s3q9g+0o0Yv7B2y7i6R9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- AOS (scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;            /* slate-900 */
+      --bg-2: #0b1224;          /* slightly darker */
+      --text: #e5e7eb;          /* zinc-200 */
+      --muted: #a1a1aa;         /* zinc-400 */
+      --card: #111827;          /* gray-900 */
+      --accent: #14b8a6;        /* teal-500 */
+      --accent-2: #7c3aed;      /* violet-600 */
+      --ring: rgba(20,184,166,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+      color: var(--text);
+      background: radial-gradient(1000px 600px at 120% -10%, rgba(124,58,237,.15), transparent 60%),
+                  radial-gradient(800px 500px at -20% 10%, rgba(20,184,166,.15), transparent 60%),
+                  linear-gradient(180deg, var(--bg-2), var(--bg));
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* --- Navbar --- */
+    .nav {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(10,12,23,.9), rgba(10,12,23,.65));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.3px; }
+    .brand .logo {
+      width: 36px; height: 36px; border-radius: 12px; background:
+        conic-gradient(from 180deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; color:#0b1020; font-weight:900;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.15);
+    }
+    .nav-links { display:flex; gap: 1.2rem; align-items:center; }
+    .nav-links a { opacity:.9; padding:8px 12px; border-radius: 10px; }
+    .nav-links a:hover { background: rgba(124,58,237,.08); opacity:1; }
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem; padding:10px 16px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white; font-weight: 600; box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 14px 34px rgba(124,58,237,.35); }
+
+    /* --- Hero --- */
+    .hero { position: relative; overflow: hidden; padding: 96px 0 60px; }
+    .hero-grid { display:grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items:center; }
+    .eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size:.82rem; }
+    .title { font-family: 'Poppins', sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; margin: 10px 0 14px; }
+    .title .gradient { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip:text; background-clip:text; color: transparent; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; }
+    .cta { margin-top: 22px; display:flex; gap:12px; flex-wrap:wrap; }
+    .cta .ghost { background: rgba(124,58,237,.12); border:1px solid rgba(124,58,237,.35); }
+
+    .hero-card { background: rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius);
+      padding: 22px; display:flex; gap:14px; align-items:center; box-shadow: var(--shadow); }
+    .hero-card i { color: var(--accent); font-size: 1.1rem; }
+    .hero .badges { display:grid; grid-template-columns: 1fr; gap:12px; }
+
+    .orb { position:absolute; width: 540px; height:540px; border-radius:50%; background:
+      radial-gradient(circle at 30% 30%, rgba(124,58,237,.35), transparent 40%),
+      radial-gradient(circle at 70% 70%, rgba(20,184,166,.35), transparent 50%);
+      filter: blur(40px); opacity:.65; pointer-events:none; right:-120px; top:-120px; }
+
+    /* --- Sections --- */
+    section { padding: 72px 0; position: relative; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 18px; font-family: 'Poppins', sans-serif; }
+    .section-sub { color: var(--muted); margin-bottom: 30px; }
+
+    /* --- About --- */
+    .about { display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; }
+    .card { background: rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .chip-row { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip { padding: 8px 12px; border-radius: 999px; font-size:.9rem; background: rgba(124,58,237,.12); border:1px solid rgba(124,58,237,.35); }
+
+    /* --- Skills --- */
+    .skills-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill { padding: 14px; border-radius: 14px; background: rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.08); }
+    .bar { height: 8px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+    .bar > span { display:block; height: 8px; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius:999px; }
+
+    /* --- Projects --- */
+    .projects-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project { position:relative; overflow:hidden; border-radius: var(--radius); background: #0a1020; border:1px solid rgba(255,255,255,.08); }
+    .project img { height: 180px; object-fit: cover; width:100%; filter: saturate(1.05); }
+    .project .content { padding: 16px 16px 18px; }
+    .tag { font-size:.75rem; opacity:.85; background: rgba(20,184,166,.12); border:1px solid rgba(20,184,166,.35); padding: 4px 8px; border-radius: 999px; margin-right:6px; }
+    .project .actions { display:flex; gap:10px; margin-top:10px; }
+    .project .actions a { font-size:.9rem; padding:8px 12px; border-radius:10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+    .project:hover { transform: translateY(-3px); transition: transform .2s ease; }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; padding: 20px; }
+    .modal.active { display:flex; }
+    .modal-card { width: min(780px, 95%); background: #0a0f1e; border:1px solid rgba(255,255,255,.1); border-radius: 18px; box-shadow: var(--shadow); }
+    .modal-header { display:flex; align-items:center; justify-content:space-between; padding: 14px 18px; border-bottom:1px solid rgba(255,255,255,.08); }
+    .modal-body { padding: 18px; display:grid; grid-template-columns: 1fr; gap:14px; }
+
+    /* --- Certificates (simple carousel) --- */
+    .carousel { position:relative; overflow:hidden; }
+    .track { display:flex; gap: 16px; transition: transform .5s ease; }
+    .cert-card { min-width: 300px; background: rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 16px; }
+    .carousel .controls { position:absolute; inset: 0; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    .carousel button { pointer-events:auto; background: rgba(124,58,237,.2); border:1px solid rgba(124,58,237,.5); padding:10px 12px; border-radius: 50%; }
+
+    /* --- Timeline --- */
+    .timeline { border-left: 2px solid rgba(255,255,255,.1); padding-left: 18px; }
+    .t-item { position:relative; margin: 0 0 14px; }
+    .t-item::before { content:""; width: 10px; height:10px; background: linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:50%; position:absolute; left:-6px; top:.4rem; box-shadow: 0 0 0 3px rgba(124,58,237,.18); }
+
+    /* --- Contact --- */
+    .contact-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .input { width:100%; background:#0a1020; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; color:var(--text); }
+    textarea.input { height: 140px; resize: vertical; }
+    .socials { display:flex; gap: 12px; }
+    .icon-btn { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+
+    /* --- Footer --- */
+    footer { padding: 26px 0 42px; color: var(--muted); text-align:center; }
+
+    /* --- Responsive --- */
+    @media (max-width: 960px) {
+      .hero-grid, .about, .contact-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display:none; }
+      .menu-btn { display:inline-grid; place-items:center; width:40px; height:40px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); }
+      .mobile-panel { display:none; position:absolute; right:0; top:60px; background:#0b1224; border:1px solid rgba(255,255,255,.08); border-radius: 14px; padding:10px; }
+      .mobile-panel a { display:block; padding:10px 14px; border-radius:10px; }
+      .mobile-panel a:hover { background: rgba(255,255,255,.05); }
+    }
+    @media (max-width: 640px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand"><span class="logo">P</span> <span>Parvati</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certs">Certificates</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#education">Education</a>
+        <a href="#contact" class="btn"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      </div>
+      <button class="menu-btn" aria-label="Open Menu" style="display:none"><i class="fa-solid fa-bars"></i></button>
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certs">Certificates</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="orb" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow" data-aos="fade-up">Software Developer</div>
+        <h1 class="title" id="typedTitle"><span class="gradient">Hi, I'm Parvati</span> — building delightful web experiences.</h1>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="80">
+          MERN stack developer with a passion for clean code, smooth interactions, and data-driven problem solving.
+          I love crafting accessible, responsive, and performant products.
+        </p>
+        <div class="cta" data-aos="fade-up" data-aos-delay="120">
+          <a class="btn" href="#projects"><i class="fa-solid fa-bolt"></i> View Projects</a>
+          <a class="btn ghost" href="mailto:parvati000777@gmail.com"><i class="fa-solid fa-envelope"></i> Hire Me</a>
+        </div>
+        <div class="chip-row" style="margin-top:18px" data-aos="fade-up" data-aos-delay="220">
+          <span class="chip">Open to SDE Internships</span>
+          <span class="chip">Based in India</span>
+          <span class="chip">Available: 2025</span>
+        </div>
+      </div>
+      <div class="badges" aria-label="Highlights">
+        <div class="hero-card" data-aos="zoom-in"><i class="fa-solid fa-shield-halved"></i> JWT auth, REST APIs & secure MERN apps</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about">
+      <div class="card" data-aos="fade-right">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-sub">Computer Science student at Lovely Professional University (CGPA 7.64). I build full‑stack web apps with React, Node.js, Express, and MongoDB, and I love data stories with Power BI. Beyond coding, I enjoy collaborating in hackathons and contributing to open‑source.</p>
+        <div class="chip-row" style="margin-top:12px">
+          <span class="chip">Team Player</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Leadership</span>
+          <span class="chip">Time Management</span>
+        </div>
+      </div>
+      <div class="card" data-aos="fade-left">
+        <h3 style="margin:0 0 10px">Quick Links</h3>
+        <div class="socials">
+          <a class="icon-btn" href="https://www.linkedin.com/in/parvati-kumari" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a class="icon-btn" href="https://github.com/Parvati007" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a class="icon-btn" href="https://parvati007.github.io" target="_blank" aria-label="Portfolio"><i class="fa-solid fa-globe"></i></a>
+          <a class="icon-btn" href="mailto:parvati000777@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div style="margin-top:16px">
+          <a class="btn" href="#contact"><i class="fa-regular fa-calendar-check"></i> Let's Collaborate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Skills</h2>
+      <p class="section-sub" data-aos="fade-up" data-aos-delay="60">Languages, frameworks, tools & soft skills I work with.</p>
+
+      <div class="skills-grid">
+        <div class="skill" data-skill="90" data-aos="zoom-in"><strong>JavaScript / TypeScript</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="85" data-aos="zoom-in" data-aos-delay="40"><strong>React.js / Vite</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="80" data-aos="zoom-in" data-aos-delay="80"><strong>Node.js / Express</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="78" data-aos="zoom-in" data-aos-delay="120"><strong>MongoDB / Mongoose</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="72" data-aos="zoom-in" data-aos-delay="160"><strong>Python / Java / C++</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="70" data-aos="zoom-in" data-aos-delay="200"><strong>HTML / CSS</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="65" data-aos="zoom-in" data-aos-delay="240"><strong>Power BI / DAX</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="64" data-aos="zoom-in" data-aos-delay="280"><strong>JWT / Auth / REST</strong><div class="bar"><span></span></div></div>
+        <div class="skill" data-skill="60" data-aos="zoom-in" data-aos-delay="320"><strong>Git / GitHub / Postman</strong><div class="bar"><span></span></div></div>
+      </div>
+
+      <div class="chip-row" style="margin-top:16px" data-aos="fade-up">
+        <span class="chip">Django</span>
+        <span class="chip">Bootstrap</span>
+        <span class="chip">SQL</span>
+        <span class="chip">PWA</span>
+        <span class="chip">Axios</span>
+        <span class="chip">XAMPP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Projects</h2>
+      <p class="section-sub" data-aos="fade-up" data-aos-delay="60">Selected work featuring full‑stack apps and analytics dashboards.</p>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project" data-modal="#m1" data-aos="fade-up">
+          <img alt="CodeBrew Cafe" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop" />
+          <div class="content">
+            <h3>CodeBrew Cafe – E‑Commerce (MERN + PWA)</h3>
+            <div style="margin:6px 0 8px">
+              <span class="tag">React</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">JWT</span>
+            </div>
+            <p class="section-sub">Secure user auth, admin dashboard, product catalog, cart & orders. Offline‑ready with PWA.</p>
+            <div class="actions">
+              <a href="#" class="open">Details</a>
+              <a href="https://github.com/Parvati007" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project" data-modal="#m2" data-aos="fade-up" data-aos-delay="80">
+          <img alt="Food Mart" src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=1200&auto=format&fit=crop" />
+          <div class="content">
+            <h3>Food Mart – Grocery UI</h3>
+            <div style="margin:6px 0 8px">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            </div>
+            <p class="section-sub">Responsive interface with modern layout, category sections, carousels & sticky header/footer.</p>
+            <div class="actions">
+              <a href="#" class="open">Details</a>
+              <a href="https://github.com/Parvati007" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project" data-modal="#m3" data-aos="fade-up" data-aos-delay="160">
+          <img alt="Myntra Dashboard" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" />
+          <div class="content">
+            <h3>Myntra E‑commerce Analysis – Power BI</h3>
+            <div style="margin:6px 0 8px">
+              <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span>
+            </div>
+            <p class="section-sub">Interactive dashboard for sales trends, performance KPIs & customer behavior insights.</p>
+            <div class="actions">
+              <a href="#" class="open">Details</a>
+              <a href="https://github.com/Parvati007" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certs">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Certificates</h2>
+      <div class="carousel card" data-aos="fade-up" style="margin-top:10px">
+        <div class="track" id="certTrack">
+          <div class="cert-card"><h4>Frontend Developer (React) – HackerRank</h4><p class="section-sub">Dec 2024</p></div>
+          <div class="cert-card"><h4>HTML, CSS & JS – Coursera</h4><p class="section-sub">Apr 2024</p></div>
+          <div class="cert-card"><h4>Server‑Side JS with Node.js – Coursera</h4><p class="section-sub">Mar 2024</p></div>
+          <div class="cert-card"><h4>Introduction to Generative AI – Coursera</h4><p class="section-sub">Jan 2024</p></div>
+        </div>
+        <div class="controls">
+          <button id="prevCert" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="nextCert" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Achievements & Activities</h2>
+      <div class="timeline card" data-aos="fade-up">
+        <div class="t-item"><strong>GirlScript Summer of Code (GSSoC) '25 – Contributor</strong><div class="section-sub">Open‑source contributions, PR reviews & issue tracking. (Jul 2025)</div></div>
+        <div class="t-item"><strong>CodeStorm 36‑Hour Hackathon – Microsoft Learn SA</strong><div class="section-sub">Qualified for Round‑2 at University level. (Oct 2024)</div></div>
+        <div class="t-item"><strong>Flipkart Grid 5.0 – E‑Commerce & Tech Quiz</strong><div class="section-sub">Team Tech‑Masters (3 members). (Aug 2023)</div></div>
+        <div class="t-item"><strong>Community Engagement – RMKM Ajmer</strong><div class="section-sub">Awareness & education program in rural areas as CBR team. (Jul 2023)</div></div>
+        <div class="t-item"><strong>Kho‑Kho – Inter Hostel Winner (LPU)</strong><div class="section-sub">Showcased teamwork, agility & strategy. (Feb 2023)</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Education</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="60">
+        <div class="t-item"><strong>Lovely Professional University</strong> — B.Tech CSE, CGPA: 7.64 <span class="section-sub">(Since Aug 2022, Punjab)</span></div>
+        <div class="t-item"><strong>Kendriya Vidyalaya Nasirabad</strong> — Intermediate, 95.8% <span class="section-sub">(Apr 2020 – Mar 2021)</span></div>
+        <div class="t-item"><strong>Kendriya Vidyalaya Nasirabad</strong> — Matriculation, 92.6% <span class="section-sub">(Apr 2018 – Mar 2019)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Contact</h2>
+      <p class="section-sub" data-aos="fade-up" data-aos-delay="60">Want to collaborate or have an opportunity? Drop a message.</p>
+
+      <div class="contact-grid">
+        <form class="card" id="contactForm" data-aos="fade-right" onsubmit="return false;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <input class="input" type="text" name="name" placeholder="Your Name" required>
+            <input class="input" type="email" name="email" placeholder="Your Email" required>
+          </div>
+          <input class="input" type="text" name="subject" placeholder="Subject" style="margin-top:12px">
+          <textarea class="input" name="message" placeholder="Message" required style="margin-top:12px"></textarea>
+          <button class="btn" style="margin-top:12px" id="sendBtn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+          <div id="formNote" class="section-sub" style="margin-top:8px"></div>
+        </form>
+
+        <div class="card" data-aos="fade-left">
+          <h3 style="margin-top:0">Let's Connect</h3>
+          <p>Email: <a href="mailto:parvati000777@gmail.com">parvati000777@gmail.com</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/parvati-kumari" target="_blank">/in/parvati-kumari</a></p>
+          <p>GitHub: <a href="https://github.com/Parvati007" target="_blank">github.com/Parvati007</a></p>
+          <div class="socials" style="margin-top:10px">
+            <a class="icon-btn" href="https://www.linkedin.com/in/parvati-kumari" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a class="icon-btn" href="https://github.com/Parvati007" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a class="icon-btn" href="https://parvati007.github.io" target="_blank"><i class="fa-solid fa-globe"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Parvati — Built with ♥︎ using HTML, CSS & JS</div>
+  </footer>
+
+  <!-- Modals -->
+  <div id="m1" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header"><strong>CodeBrew Cafe – E‑Commerce</strong><button class="icon-btn close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body">
+        <p>Developed and deployed a responsive MERN e‑commerce app with user login, admin dashboard, product catalog, cart & order management. Integrated MongoDB models for users, admins, products and orders. Implemented secure JWT authentication & RESTful APIs. Enhanced UX with PWA features for offline access. Deployed on Vercel.</p>
+        <div class="chip-row"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">JWT</span><span class="chip">Axios</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="m2" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header"><strong>Food Mart – Grocery UI</strong><button class="icon-btn close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body">
+        <p>Designed a fully responsive online grocery store interface using semantic HTML, modern CSS layout (Grid/Flex) and vanilla JS interactivity. Built reusable components: product cards, category sections, brand carousels, and sticky fixed header/footer.</p>
+        <div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="m3" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header"><strong>Myntra E‑commerce Analysis – Power BI</strong><button class="icon-btn close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body">
+        <p>Created an interactive Power BI dashboard to analyze Myntra's e‑commerce data focusing on sales trends, product performance and customer behavior. Performed data cleaning & transformation in Power Query, and implemented calculated measures via DAX. Built KPI‑first layouts for business insights.</p>
+        <div class="chip-row"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">Power Query</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // AOS init
+    AOS.init({ once: true, duration: 700, easing: 'ease-out-quart' });
+
+    // Mobile menu toggle (visible only under 960px)
+    const menuBtn = document.querySelector('.menu-btn');
+    const mobile = document.getElementById('mobilePanel');
+    const mq = window.matchMedia('(max-width: 960px)');
+    const updateMenuVisibility = () => { menuBtn.style.display = mq.matches ? 'inline-grid' : 'none'; if(!mq.matches) mobile.style.display = 'none'; };
+    updateMenuVisibility();
+    mq.addEventListener('change', updateMenuVisibility);
+    menuBtn?.addEventListener('click', () => { mobile.style.display = mobile.style.display === 'block' ? 'none' : 'block'; });
+    mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobile.style.display = 'none'));
+
+    // Animated skill bars
+    const inView = (el) => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight - 80 && r.bottom > 0;
+    };
+    const bars = document.querySelectorAll('.skill');
+    const animateBars = () => {
+      bars.forEach(card => {
+        const span = card.querySelector('.bar > span');
+        if (inView(card) && span.style.width === '') {
+          const pct = card.getAttribute('data-skill');
+          span.style.transition = 'width 1200ms cubic-bezier(.2,.8,.2,1)';
+          requestAnimationFrame(()=> span.style.width = pct + '%');
+        }
+      });
+    };
+    animateBars();
+    window.addEventListener('scroll', animateBars);
+
+    // Typewriter intro (simple)
+    const typedTitle = document.getElementById('typedTitle');
+    const fullText = typedTitle.innerHTML;
+    typedTitle.innerHTML = '';
+    let idx = 0;
+    const type = () => {
+      typedTitle.innerHTML = fullText.slice(0, idx++);
+      if (idx <= fullText.length) requestAnimationFrame(type);
+    };
+    setTimeout(type, 300);
+
+    // Modal controls
+    document.querySelectorAll('.project .open').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modal = btn.closest('.project').getAttribute('data-modal');
+        const n = document.querySelector(modal);
+        n.classList.add('active');
+      });
+    });
+    document.querySelectorAll('.modal').forEach(m => {
+      m.addEventListener('click', (e) => { if(e.target === m) m.classList.remove('active'); });
+      m.querySelector('.close').addEventListener('click', ()=> m.classList.remove('active'));
+    });
+
+    // Certificates carousel
+    const track = document.getElementById('certTrack');
+    const prev = document.getElementById('prevCert');
+    const next = document.getElementById('nextCert');
+    let offset = 0;
+    const step = 316; // card width + gap
+    next.addEventListener('click', () => { offset = Math.min(offset + step, (track.scrollWidth - track.clientWidth)); track.style.transform = `translateX(${-offset}px)`; });
+    prev.addEventListener('click', () => { offset = Math.max(offset - step, 0); track.style.transform = `translateX(${-offset}px)`; });
+
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Fake contact (demo only)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', () => {
+      document.getElementById('formNote').textContent = 'Thanks! This demo uses a mailto link. Replace with Formspree/EmailJS to make it live.';
+      window.location.href = `mailto:parvati000777@gmail.com?subject=${encodeURIComponent(form.subject.value)}&body=${encodeURIComponent(form.message.value + '\n\nFrom: ' + form.name.value + ' (' + form.email.value + ')')}`;
+    });
+  </script>
+</body>
+</html>
