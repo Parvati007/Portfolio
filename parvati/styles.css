@@ -98,6 +98,12 @@
     .project .actions { display:flex; gap:10px; margin-top:10px; }
     .project .actions a { font-size:.9rem; padding:8px 12px; border-radius:10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
     .project:hover { transform: translateY(-3px); transition: transform .2s ease; }
+    .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+             
 
     /* Modal */
     .modal { position: fixed; inset: 0; background: rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; padding: 20px; }
@@ -115,7 +121,7 @@
 
     /* --- Timeline --- */
     .timeline { border-left: 2px solid rgba(255,255,255,.1); padding-left: 18px; }
-    .t-item { position:relative; margin: 0 0 14px; }
+    .t-item { position:relative; margin: 0 0 14px;padding-left:16px; }
     .t-item::before { content:" "; width: 10px; height:10px; background: linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:50%; position:absolute; left:-6px; top:.4rem; box-shadow: 0 0 0 3px rgba(124,58,237,.18); }
 
     /* --- Contact --- */
