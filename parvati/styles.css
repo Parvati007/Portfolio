@@ -148,6 +148,43 @@
       .skills-grid { grid-template-columns: 1fr; }
     }
    
+.projects-grid {
+  perspective: 1000px;
+}
+
+/* Card base */.project {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #0a1020;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth out + on mouseleave */
+  transform-style: preserve-3d;    /* enable 3D */
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.project:hover {
+  animation: projectTiltSmooth 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  box-shadow:
+    0 28px 55px rgba(20, 184, 166, 0.3),
+    0 18px 35px rgba(124, 58, 237, 0.2);
+}
+
+@keyframes projectTiltSmooth {
+  0%   { transform: translateY(-6px) scale(1.02) rotateX(0deg)  rotateY(0deg); }
+  20%  { transform: translateY(-8px) scale(1.03) rotateX(2deg)  rotateY(-2deg); }
+  50%  { transform: translateY(-9px) scale(1.04) rotateX(-2deg) rotateY(2deg); }
+  80%  { transform: translateY(-8px) scale(1.03) rotateX(1deg)  rotateY(-1deg); }
+  100% { transform: translateY(-8px) scale(1.03) rotateX(0deg)  rotateY(0deg); }
+}
+
+.project img { height: 180px; object-fit: cover; width: 100%; filter: saturate(1.05); }
+.project .content { padding: 16px 16px 18px; }
+.project .actions { display:flex; gap:10px; margin-top:10px; }
+.project .actions a { font-size:.9rem; padding:8px 12px; border-radius:10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+
+
 
     
 

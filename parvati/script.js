@@ -73,4 +73,3 @@
       document.getElementById('formNote').textContent = 'Thanks! This demo uses a mailto link. Replace with Formspree/EmailJS to make it live.';
       window.location.href = `mailto:parvati000777@gmail.com?subject=${encodeURIComponent(form.subject.value)}&body=${encodeURIComponent(form.message.value + '\n\nFrom: ' + form.name.value + ' (' + form.email.value + ')')}`;
     });
-  
