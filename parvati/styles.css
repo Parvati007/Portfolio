@@ -1,5 +1,4 @@
-
-    :root {
+:root {
       --bg: #0f172a;            /* slate-900 */
       --bg-2: #0b1224;          /* slightly darker */
       --text: #e5e7eb;          /* zinc-200 */
@@ -127,7 +126,24 @@
     .input { width:100%; background:#0a1020; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; color:var(--text); }
     textarea.input { height: 140px; resize: vertical; }
     .socials { display:flex; gap: 12px; }
-    .icon-btn { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+    .icon-btn {
+                width: 44px;
+                height: 44px;
+                display: grid;
+                place-items: center;
+                border-radius: 50%;
+                border: 1px solid rgb(102, 102, 96);
+                background: linear-gradient(135deg, var(--accent), var(--accent-2));
+                color: white;
+                font-size: 20px;
+                text-decoration: none;
+                transition: background 0.3s, transform 0.2s;
+              }
+
+              .icon-btn:hover {
+                background: linear-gradient(105deg, var(--accent), var(--accent-2));
+                transform: scale(1.1);
+              }
 
     /* --- Footer --- */
     footer { padding: 26px 0 42px; color: var(--muted); text-align:center; }
@@ -183,9 +199,7 @@
 .project .content { padding: 16px 16px 18px; }
 .project .actions { display:flex; gap:10px; margin-top:10px; }
 .project .actions a { font-size:.9rem; padding:8px 12px; border-radius:10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
-
-
-
+   
     
 
     
